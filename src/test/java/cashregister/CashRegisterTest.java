@@ -31,28 +31,37 @@ public class CashRegisterTest {
 
     @Test
     public void should_print_the_stub_purchase_when_call_process() {
-    	//given
-    	String[] message = new String[1];
-    	Printer printer = new Printer() {
-    		@Override
-    		public void print(String printThis) {
-    			message[0] = printThis;
-    		}
-    	};
-    	CashRegister cashRegister = new CashRegister(printer);
-    	Item[] items = new Item[1];
-    	items[0] = new Item("name", 1);
-    	Purchase purchase = new Purchase(items);
+//    	//given
+//    	String[] message = new String[1];
+//    	Printer printer = new Printer() {
+//    		@Override
+//    		public void print(String printThis) {
+//    			message[0] = printThis;
+//    		}
+//    	};
+//    	CashRegister cashRegister = new CashRegister(printer);
+//    	Item[] items = new Item[1];
+//    	items[0] = new Item("name", 1);
+//    	Purchase purchase = new Purchase(items);
+//    	
+//    	String expected = "";
+//    	for (Item item : items) {
+//    		expected += item.getName() + "\t" + item.getPrice() + "\n";
+//        }
+//        //when
+//    	cashRegister.process(purchase);	
+//    		
+//        //then
+//    	assertEquals(expected, message[0]);
     	
-    	String expected = "";
-    	for (Item item : items) {
-    		expected += item.getName() + "\t" + item.getPrice() + "\n";
-        }
+    	//given
+    	Printer printer = mock(Printer.class);
+    	Purchase purchase = mock(Purchase.class);
+    	CashRegister cashRegister = new CashRegister(printer);
         //when
-    	cashRegister.process(purchase);	
-    		
+    	cashRegister.process(purchase);
         //then
-    	assertEquals(expected, message[0]);
+    	verify(purchase).asString();
     }
 
     @Test
